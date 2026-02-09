@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #0b1220;
+  color: #e5e7eb;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem;
+}
+
+header h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+header p {
+  opacity: 0.85;
+}
+
+.links a {
+  margin-right: 1rem;
+  color: #60a5fa;
+  text-decoration: none;
+}
+
+section {
+  margin-top: 2.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.card {
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.cardLinks a {
+  margin-right: 1rem;
+  color: #38bdf8;
+  text-decoration: none;
+}
