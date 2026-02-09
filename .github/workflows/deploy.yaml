@@ -1,4 +1,4 @@
-name: Deploy React (TS) Portfolio
+name: Deploy React TS Portfolio
 
 on:
   push:
@@ -10,6 +10,10 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: my-portfolio
+
     steps:
       - uses: actions/checkout@v4
 
@@ -17,10 +21,10 @@ jobs:
         with:
           node-version: 18
 
-      - run: npm install
+      - run: npm ci
       - run: npm run build
 
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: my-portfolio/dist
