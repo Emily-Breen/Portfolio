@@ -1,54 +1,82 @@
 // src/App.tsx
 import "./App.css";
+import { useEffect } from "react";
 import profileImg from "./assets/IMG_2545.jpg";
+import tamagotchiImg from "./assets/Tamagotchi1.png";
+import tamagotchi2Img from "./assets/Tamagotchi2.png";
+import spacCruiser1Img from "./assets/Space Cruiser1.png";
+import spacCruiser2Img from "./assets/Space Cruiser2.png";
+import BZAB1Img from "./assets/BZAB1.png";
+import BZAB2Img from "./assets/BZAB2.png";
+import CIH1Img from "./assets/CIH1.png";
+import CIH2Img from "./assets/CIH2.png";
+
 
 type Link = { label: string; href: string };
-type Card = { title: string; body: string; meta?: string; links?: Link[] };
+type Card = { title: string; body: string; meta?: string; links?: Link[]; images?: string[]; };
 type TimelineItem = { role: string; org: string; when: string; bullets: string[] };
 
 const links: Link[] = [
   { label: "GitHub", href: "https://github.com/Emily-Breen" },
-  { label: "Bronze Age Brawl", href: "https://scaldypanda.itch.io/bronze-age-brawl" },
 ];
 
 const aboutCards: Card[] = [
   {
-    title: "About",
-    body:
-      "Final-year Computer Games Development student at SETU Carlow with hands-on industry experience, including a six-month internship at Netwatch Ireland. Strong foundation across frontend, backend, and mobile development.",
+    title: "What I enjoy",
+    body: "Building polished UI, solving gameplay/system problems, and making features feel great to use.",
   },
   {
-    title: "Now",
-    body:
-      "Seeking a graduate / junior software developer role. Comfortable working in Agile/Scrum teams and delivering production-ready features with developers and QA.",
+    title: "What I’m looking for",
+    body: "Graduate / junior software developer roles (web or games) where I can learn fast and ship real features.",
   },
   {
-    title: "Focus",
-    body:
-      "React + TypeScript UI, .NET backend integration, REST APIs, clean code, and collaborative workflows using Git/GitHub and Azure DevOps.",
+    title: "How I work",
+    body: "Agile/Scrum, clean code, version control, and collaborating closely with developers and QA.",
   },
 ];
+
 
 const techColumns: { title: string; items: string[] }[] = [
   { title: "Languages", items: ["C#", "TypeScript", "JavaScript", "C++", "SQL", "Python", "GDScript"] },
   { title: "Frontend", items: ["React", "React Native", "HTML", "CSS"] },
   { title: "Backend", items: [".NET", "Node.js", "REST APIs"] },
-  { title: "Tools & Practices", items: ["Git/GitHub", "Azure DevOps", "Agile/Scrum", "OOP", "Unit Testing", "Debugging"] },
+  { title: "DevOps & Workflow", items: ["Git/GitHub", "Azure DevOps", "Docker", "Agile/Scrum"] },
+  { title: "Practices", items: ["OOP", "Unit Testing", "Debugging"] },
 ];
 
 const projects: Card[] = [
   {
-    title: "Bronze Age Brawl",
-    meta: "Award-winning · EA Games Fleadh 2024",
+    title: "Can I Hinder?",
+    meta: "Real-time Streamer Game · In Development",
     body:
-      "Lead Designer within a multidisciplinary team. Contributed to gameplay design, iteration, and feature development using Agile practices and collaborative workflows.",
-    links: [{ label: "View project", href: "https://scaldypanda.itch.io/bronze-age-brawl" }],
+      "An interactive real-time streamer game where spectators use a Progressive Web App (PWA) to influence live gameplay. Built with SFML/C++ for the game client, React + TypeScript for the PWA frontend, and ASP.NET (C#) APIs hosted on Azure. A Node.js server manages real-time communication between players and spectators. ",
+    images: [CIH1Img, CIH2Img]
   },
   {
-    title: "Netwatch Internship Work",
-    meta: "Full-stack + mobile · 2025",
+    title: "Bronze Age Brawl",
+    meta: "Award-winning - Best in Gameplay · EA Games Fleadh 2024",
     body:
-      "Developed and maintained web applications using React, TypeScript, and C# (.NET). Contributed to React Native mobile features and integrated RESTful APIs across frontend and backend systems.",
+      "Lead Designer within a multidisciplinary team. Contributed to gameplay design, iteration, and feature development using Agile practices. Designed and implemented core combat mechanics, character abilities, animations and enemy behaviours in C++ with SFML. Collaborated closely with artists and designers to ensure cohesive gameplay experience. Received 'Best in Gameplay' award at EA Games Fleadh 2024.",
+    links: [{ label: "View project", href: "https://scaldypanda.itch.io/bronze-age-brawl" }],
+    images:[BZAB1Img, BZAB2Img]
+  },
+
+  {
+    title: "Tamagochi Clone",
+    meta: "Spring Interactive · March 2023",
+    body:
+      "A virtual pet game built in C++ using SFML. Implemented a fixed-timestep game loop, event-driven input handling, sprite animation, and multiple game states (gameplay/game over). Added pet stats (hunger, cleanliness, health) that change over time with UI interactions (feed/clean) and on-screen feedback messages.",
+      links: [{ label: "View project", href: "https://github.com/PeterLowe/spring-interactive-Emily-Breen"}],
+      images: [tamagotchiImg, tamagotchi2Img],
+  },
+  {
+    title: "SpaceCruiser",
+    meta: "Sci-Fi Survival · April 2023",
+    body:
+      "A space survival game with real-time strategy elements Built in C++ using SFML. Players navigate through an onslaught of enemies, engaging with in tactical battles.",
+        links: [{ label: "View project", href: "https://github.com/Emily-Breen/1st-year-project-SPACE-CRUSIER.git"}],
+    images: [spacCruiser1Img, spacCruiser2Img],
+    
   },
 ];
 
@@ -60,9 +88,19 @@ const timeline: TimelineItem[] = [
     bullets: [
       "React + TypeScript + C# (.NET) full-stack development",
       "React Native mobile contribution",
-      "Designed and implemented a PWA",
+      "Designed and implemented a PWA with GraphQL backend integration, using service workers for offline functionality and authorization using Biometrics",
       "Agile/Scrum: stand-ups, sprint planning, reviews",
       "Git/GitHub + Azure DevOps collaboration",
+    ],
+  },
+  {
+    role: "BA (Hons) Computer Games Development",
+    org: "SETU Carlow",
+    when: "Sept 2022 – Present",
+    bullets: [
+      "Lead Designer of “Bronze Age Brawl” (EA Games Fleadh 2024)",
+      "SETU Carlow Game Jam 2023 & 2024",
+      "Built strong skills in OOP, problem-solving, teamwork",
     ],
   },
   {
@@ -76,16 +114,7 @@ const timeline: TimelineItem[] = [
       "Ensured compliance with data protection and regulatory requirements",
     ],
   },
-  {
-    role: "BA (Hons) Computer Games Development",
-    org: "SETU Carlow",
-    when: "Sept 2022 – Present",
-    bullets: [
-      "Lead Designer of “Bronze Age Brawl” (EA Games Fleadh 2024)",
-      "SETU Carlow Game Jam 2023 & 2024",
-      "Built strong skills in OOP, problem-solving, teamwork",
-    ],
-  },
+
 ];
 
 const DEST_EMAIL = "emilybreen8@gmail.com";
@@ -100,7 +129,24 @@ function buildMailto() {
 
 export default function App() {
   const mailtoHref = buildMailto();
+useEffect(() => {
+  const els = document.querySelectorAll<HTMLElement>("[data-reveal]");
 
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("is-visible");
+          io.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  els.forEach((el) => io.observe(el));
+  return () => io.disconnect();
+}, []);
   return (
     <div className="app">
       <div className="bgGlow" />
@@ -123,12 +169,12 @@ export default function App() {
 
       <main className="wrap">
         {/* HERO */}
-        <section className="hero">
+        <section className="hero" data-reveal>
           <div className="heroLeft">
             <p className="kicker">Junior Software Developer</p>
 
             <h1 className="h1">
-              Hi, I’m <span className="accent">Emily</span>.
+              Hi there welcome, I'm <span className="accent">Emily</span>.
             </h1>
 
             <p className="lead">
@@ -176,8 +222,8 @@ export default function App() {
                   <div className="miniValue">Netwatch Ireland (2025)</div>
                 </div>
                 <div className="mini">
-                  <div className="miniLabel">Project</div>
-                  <div className="miniValue">Bronze Age Brawl (EA Games Fleadh 2024)</div>
+                  <div className="miniLabel">Awards</div>
+                  <div className="miniValue">Bronze Age Brawl - Best in Gameplay</div>
                 </div>
                 <div className="mini">
                   <div className="miniLabel">Looking for</div>
@@ -219,6 +265,18 @@ export default function App() {
           <div className="cardGrid2">
             {projects.map((p) => (
               <article key={p.title} className="card cardHover">
+            {p.images && (
+  <div className="projectImageGrid">
+    {p.images.map((img, index) => (
+      <div
+        key={index}
+        className={`projectImageWrap stack ${p.title === "Tamagochi Clone" ? "containMode" : ""}`}
+      >
+        <img src={img} alt={`${p.title} screenshot ${index + 1}`} className={`projectImage layer layer-${index}`} />
+      </div>
+    ))}
+  </div>
+)}
                 <div className="cardRow">
                   <div>
                     <div className="cardTitle">{p.title}</div>

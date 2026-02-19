@@ -1,6 +1,9 @@
 /* src/App.css */
+
+/* =========================
+   Theme
+========================= */
 :root{
-  /* Teal on Navy */
   --navy0:#050814;
   --navy1:#070A12;
 
@@ -17,8 +20,12 @@
   --shadow: 0 24px 80px rgba(0,0,0,0.45);
 }
 
+/* =========================
+   Base
+========================= */
 *{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
+
 body{
   margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
@@ -37,7 +44,9 @@ a:hover{ opacity:0.92; }
   position:relative;
 }
 
-/* subtle dotted vibe */
+/* =========================
+   Background
+========================= */
 .bgGlow{
   position:fixed;
   inset:0;
@@ -49,14 +58,22 @@ a:hover{ opacity:0.92; }
   mask-image: radial-gradient(closest-side at 50% 15%, black 0%, transparent 70%);
 }
 
+/* =========================
+   Layout wrapper
+========================= */
 .wrap{
   width: 100%;
-  max-width: none; 
+  max-width: none;
   margin: 0 auto;
-  padding: 0 40px;
+
+  /* was: padding: 0 40px; */
+  padding-left: 40px;
+  padding-right: 56px; /* gives the nav breathing room */
 }
 
-/* topbar */
+/* =========================
+   Topbar
+========================= */
 .topbar{
   position: sticky;
   top:0;
@@ -65,12 +82,14 @@ a:hover{ opacity:0.92; }
   background: rgba(5,8,20,0.60);
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
+
 .topbarInner{
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding: 14px 0;
 }
+
 .brand{
   display:flex;
   align-items:center;
@@ -78,38 +97,64 @@ a:hover{ opacity:0.92; }
   font-weight: 750;
   letter-spacing: 0.2px;
 }
+
 .brandDot{
-  width:10px; height:10px; border-radius:999px;
+  width:10px;
+  height:10px;
+  border-radius:999px;
   background: var(--teal);
   box-shadow: 0 0 0 6px rgba(45,212,191,0.14);
 }
+
 .nav{
   display:flex;
   gap:18px;
   font-size: 13px;
   color: var(--muted);
 }
+
 .nav a:hover{ color: var(--text); }
 
-.nav .btn{
-  color: var(--text);
+/* underline hover */
+.nav a{
+  position: relative;
 }
-/* hero */
-.hero{
-  padding: 52px 0 26px;
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr; /* small adjustment */
-  gap: 40px;
-  align-items: start;
+.nav a::after{
+  content:"";
+  position:absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: rgba(45,212,191,0.7);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms ease;
+  border-radius: 999px;
 }
+.nav a:hover::after{
+  transform: scaleX(1);
+}
+
+/* =========================
+   Hero
+========================= */
 .hero{
   margin-left: auto;
   margin-right: auto;
+
+  padding: 52px 0 26px;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 40px;
+  align-items: start;
 }
+
 .heroRight{
-  display: flex;
-  justify-content: flex-end; /* pushes the card to the right */
+  display:flex;
+  justify-content:flex-end;
 }
+
 .kicker{
   margin:0 0 10px;
   font-size: 12px;
@@ -117,12 +162,14 @@ a:hover{ opacity:0.92; }
   text-transform: uppercase;
   color: rgba(255,255,255,0.70);
 }
+
 .h1{
   margin:0;
   font-size: clamp(34px, 4.5vw, 52px);
   line-height: 1.06;
   letter-spacing: -0.6px;
 }
+
 .accent{ color: var(--teal); }
 
 .lead{
@@ -138,6 +185,17 @@ a:hover{ opacity:0.92; }
   gap: 12px;
   flex-wrap:wrap;
 }
+
+.heroLinks{
+  margin-top: 16px;
+  display:flex;
+  flex-wrap:wrap;
+  gap: 10px;
+}
+
+/* =========================
+   Buttons / Chips
+========================= */
 .btn{
   display:inline-flex;
   align-items:center;
@@ -146,10 +204,15 @@ a:hover{ opacity:0.92; }
   border-radius: 14px;
   font-weight: 650;
   border: 1px solid transparent;
-  transition: transform 0.12s ease, opacity 0.12s ease;
   cursor: pointer;
+
+  position: relative;
+  overflow: hidden;
+
+  transition: transform 0.12s ease, opacity 0.12s ease;
 }
 .btn:active{ transform: translateY(1px); }
+
 .btn.primary{
   background: linear-gradient(135deg, var(--teal), var(--teal2));
   color: #061018;
@@ -161,12 +224,23 @@ a:hover{ opacity:0.92; }
   color: var(--text);
 }
 
-.heroLinks{
-  margin-top: 16px;
-  display:flex;
-  flex-wrap:wrap;
-  gap: 10px;
+/* button shine */
+.btn::after{
+  content:"";
+  position:absolute;
+  top:-40%;
+  left:-60%;
+  width: 60%;
+  height: 180%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+  transform: rotate(18deg);
+  opacity: 0;
 }
+.btn:hover::after{
+  animation: shine 800ms ease;
+  opacity: 1;
+}
+
 .chipLink{
   display:inline-flex;
   align-items:center;
@@ -180,20 +254,24 @@ a:hover{ opacity:0.92; }
 }
 .arrow{ color: rgba(255,255,255,0.60); }
 
-/* profile card */
+/* =========================
+   Profile card
+========================= */
 .profileCard{
-   width: 100%;
-  max-width: 520px;  /* makes it feel less “skinny” */
-  margin-left: auto; /* keep it anchored right */
+  width: 100%;
+  max-width: 520px;
+  margin-left: auto;
 
   border-radius: 18px;
   background: var(--panel);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   overflow:hidden;
+
   position: sticky;
   top: 84px;
 }
+
 .profileTop{
   display:flex;
   gap: 12px;
@@ -201,10 +279,11 @@ a:hover{ opacity:0.92; }
   padding: 14px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
+
 .avatar{
   width: 200px;
   height: 200px;
-  border-radius: 20px; /* slightly softer */
+  border-radius: 20px;
   overflow: hidden;
 
   background: rgba(0,0,0,0.25);
@@ -221,6 +300,7 @@ a:hover{ opacity:0.92; }
   object-fit: cover;
   display:block;
 }
+
 .profileName{ font-weight: 750; }
 .profileMeta{ color: var(--muted); font-size: 13px; margin-top: 2px; }
 
@@ -230,17 +310,22 @@ a:hover{ opacity:0.92; }
   gap: 10px;
   padding: 14px;
 }
+
 .mini{
   padding: 12px;
   border-radius: 16px;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.08);
 }
+
 .miniLabel{ color: rgba(255,255,255,0.62); font-size: 12px; }
 .miniValue{ margin-top: 4px; font-weight: 650; }
 
-/* sections */
+/* =========================
+   Sections / Cards
+========================= */
 .section{ padding: 40px 0; }
+
 .sectionHead{
   display:flex;
   justify-content:space-between;
@@ -249,6 +334,7 @@ a:hover{ opacity:0.92; }
   align-items: baseline;
   margin-bottom: 14px;
 }
+
 .sectionHead h2{
   margin:0;
   font-size: 22px;
@@ -262,11 +348,6 @@ a:hover{ opacity:0.92; }
   border-radius: 18px;
   padding: 16px;
 }
-.cardHover{ transition: transform 0.14s ease, border-color 0.14s ease; }
-.cardHover:hover{
-  transform: translateY(-2px);
-  border-color: rgba(45,212,191,0.22);
-}
 
 .cardTitle{ font-weight: 750; }
 .cardMeta{ margin-top: 4px; color: var(--muted); font-size: 13px; }
@@ -278,6 +359,31 @@ a:hover{ opacity:0.92; }
   align-items: baseline;
   gap: 12px;
 }
+
+.cardHover{
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.14s ease, border-color 0.14s ease, box-shadow 0.2s ease;
+}
+
+.cardHover::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background: radial-gradient(600px 160px at 25% 0%, rgba(45,212,191,0.18), transparent 60%);
+  opacity: 0;
+  transition: opacity 250ms ease;
+  pointer-events:none;
+}
+
+.cardHover:hover{
+  transform: translateY(-4px);
+  border-color: rgba(45,212,191,0.28);
+  box-shadow: 0 22px 70px rgba(0,0,0,0.55);
+}
+
+.cardHover:hover::before{ opacity: 1; }
+
 .pillBtn{
   padding: 9px 12px;
   border-radius: 999px;
@@ -287,11 +393,13 @@ a:hover{ opacity:0.92; }
   font-size: 13px;
 }
 
+/* grids */
 .cardGrid3{
   display:grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 }
+
 .cardGrid2{
   display:grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -303,12 +411,14 @@ a:hover{ opacity:0.92; }
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
 }
+
 .pillWrap{
   margin-top: 12px;
   display:flex;
   flex-wrap:wrap;
   gap: 10px;
 }
+
 .pill{
   font-size: 12px;
   padding: 7px 10px;
@@ -318,27 +428,81 @@ a:hover{ opacity:0.92; }
   color: rgba(255,255,255,0.86);
 }
 
+/* =========================
+   Project Images
+========================= */
+.projectImageGrid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.projectImageGrid.one{ grid-template-columns: 1fr; }
+
+.projectImageWrap{
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  aspect-ratio: 16 / 9;
+}
+
+.projectImageWrap.containMode{
+  aspect-ratio: auto;
+  padding: 10px;
+  background: rgba(0,0,0,0.25);
+}
+
+.projectImage{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+
+  transition: transform 450ms ease, filter 450ms ease;
+  filter: saturate(1.02) contrast(1.02);
+}
+
+.projectImageWrap.containMode .projectImage{
+  height: auto;
+  object-fit: contain;
+}
+
+.cardHover:hover .projectImage{
+  transform: scale(1.04);
+  filter: saturate(1.08) contrast(1.05);
+}
+
+/* =========================
+   Timeline
+========================= */
 .timeline{
   display:grid;
   gap: 14px;
 }
+
 .tItem{
   display:grid;
   grid-template-columns: 26px 1fr;
   gap: 12px;
   align-items: stretch;
 }
+
 .tRail{
   display:flex;
   flex-direction:column;
   align-items:center;
   padding-top: 18px;
 }
+
 .tDot{
-  width: 10px; height: 10px; border-radius: 999px;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
   background: var(--teal);
   box-shadow: 0 0 0 6px rgba(45,212,191,0.12);
 }
+
 .tLine{
   width: 2px;
   flex: 1;
@@ -346,6 +510,7 @@ a:hover{ opacity:0.92; }
   background: rgba(255,255,255,0.10);
   border-radius: 999px;
 }
+
 .list{
   margin: 12px 0 0;
   padding-left: 18px;
@@ -353,11 +518,11 @@ a:hover{ opacity:0.92; }
   line-height: 1.7;
 }
 
-.footer{
-  padding: 16px 0 44px;
-}
+.footer{ padding: 16px 0 44px; }
 
-/* ---------- Modal Contact Form ---------- */
+/* =========================
+   Modal Contact Form
+========================= */
 .modalOverlay{
   position: fixed;
   inset: 0;
@@ -378,7 +543,6 @@ a:hover{ opacity:0.92; }
   padding: 14px;
 }
 
-
 .modalHead{
   display:flex;
   align-items:flex-start;
@@ -389,9 +553,7 @@ a:hover{ opacity:0.92; }
   margin-bottom: 12px;
 }
 
-.modalTitle{
-  font-weight: 800;
-}
+.modalTitle{ font-weight: 800; }
 
 .modalSub{
   color: rgba(255,255,255,0.66);
@@ -401,10 +563,10 @@ a:hover{ opacity:0.92; }
 
 .iconBtn{
   display: grid;
-  place-items: center;                
-  line-height: 1;                    
-  font-size: 18px;                   
-  padding: 0;                          
+  place-items: center;
+  line-height: 1;
+  font-size: 18px;
+  padding: 0;
   width: 38px;
   height: 38px;
 
@@ -414,10 +576,8 @@ a:hover{ opacity:0.92; }
   border-radius: 12px;
   cursor: pointer;
 }
-.form{
-  display:grid;
-  gap: 10px;
-}
+
+.form{ display:grid; gap: 10px; }
 
 .form label span{
   display:block;
@@ -450,10 +610,7 @@ a:hover{ opacity:0.92; }
   margin-top: 4px;
 }
 
-.formNote{
-  font-size: 13px;
-  color: rgba(255,255,255,0.70);
-}
+.formNote{ font-size: 13px; color: rgba(255,255,255,0.70); }
 .formNote.ok{ color: rgba(45,212,191,0.95); }
 .formNote.err{ color: rgba(248,113,113,0.95); }
 
@@ -463,11 +620,19 @@ a:hover{ opacity:0.92; }
   color: rgba(255,255,255,0.60);
 }
 
-/* Small screens: modal becomes bottom sheet */
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 980px){
+  .hero{ grid-template-columns: 1fr; }
+  .profileCard{ position: relative; top: 0; }
+  .cardGrid3{ grid-template-columns: 1fr; }
+  .cardGrid2{ grid-template-columns: 1fr; }
+  .skillsGrid{ grid-template-columns: 1fr; }
+}
+
 @media (max-width: 520px){
-  .modalOverlay{
-    place-items: end center;
-  }
+  .modalOverlay{ place-items: end center; }
   .modal{
     width: 100%;
     border-bottom-left-radius: 0;
@@ -475,11 +640,44 @@ a:hover{ opacity:0.92; }
   }
 }
 
-/* responsive */
-@media (max-width: 980px){
-  .hero{ grid-template-columns: 1fr; }
-  .profileCard{ position: relative; top: 0; }
-  .cardGrid3{ grid-template-columns: 1fr; }
-  .cardGrid2{ grid-template-columns: 1fr; }
-  .skillsGrid{ grid-template-columns: 1fr; }
+/* =========================
+   Motion / Flashy
+========================= */
+.bgGlow{
+  animation: glowDrift 14s ease-in-out infinite;
+}
+
+@keyframes glowDrift{
+  0%{ transform: translate3d(0,0,0) scale(1); opacity:0.22; }
+  50%{ transform: translate3d(18px,-10px,0) scale(1.02); opacity:0.28; }
+  100%{ transform: translate3d(0,0,0) scale(1); opacity:0.22; }
+}
+
+/* reveal on scroll */
+[data-reveal]{
+  opacity: 0;
+  transform: translateY(16px);
+  filter: blur(6px);
+  transition:
+    opacity 600ms ease,
+    transform 600ms ease,
+    filter 700ms ease;
+}
+
+[data-reveal].is-visible{
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* optional stagger support (if you set --i inline) */
+.cardGrid2 > *[data-reveal],
+.cardGrid3 > *[data-reveal],
+.skillsGrid > *[data-reveal]{
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+
+@keyframes shine{
+  from{ transform: translateX(0) rotate(18deg); }
+  to{ transform: translateX(240%) rotate(18deg); }
 }
