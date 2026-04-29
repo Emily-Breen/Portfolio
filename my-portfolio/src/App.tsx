@@ -18,9 +18,8 @@ type TimelineItem = { role: string; org: string; when: string; bullets: string[]
 
 const links: Link[] = [
   { label: "GitHub", href: "https://github.com/Emily-Breen" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/emily-breen-491769214/" },
 ];
-
-const LINKEDIN_URL = "https://www.linkedin.com/in/emily-breen-491769214/";
 
 const aboutCards: Card[] = [
   {
@@ -160,18 +159,12 @@ useEffect(() => {
             <span>Emily Breen</span>
           </div>
 
-          <div className="topbarRight">
-            <nav className="nav">
-              <a href="#about">About</a>
-              <a href="#work">Work</a>
-              <a href="#skills">Skills</a>
-              <a href="#timeline">Timeline</a>
-            </nav>
-
-            <a className="btn ghost topContactBtn" href={LINKEDIN_URL} target="_blank" rel="noreferrer">
-              Contact on LinkedIn
-            </a>
-          </div>
+          <nav className="nav">
+            <a href="#about">About</a>
+            <a href="#work">Work</a>
+            <a href="#skills">Skills</a>
+            <a href="#timeline">Timeline</a>
+          </nav>
         </div>
       </header>
 
