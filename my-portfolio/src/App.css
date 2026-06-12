@@ -641,23 +641,23 @@ a:hover{ opacity:0.92; }
 @media (min-width: 1024px){
   .nav{ font-size: 14px; }
   .kicker{ font-size: 13px; }
-  .lead{ font-size: 18px; }
+  .lead{ font-size: 16px; }
 
   .chipLink{ font-size: 14px; }
-  .profileMeta{ font-size: 14px; }
+  .profileMeta{ font-size: 13px; }
   .miniLabel{ font-size: 13px; }
-  .miniValue{ font-size: 16px; }
+  .miniValue{ font-size: 14px; }
 
-  .sectionHead h2{ font-size: 26px; }
-  .sectionHead p{ font-size: 16px; }
+  .sectionHead h2{ font-size: 24px; }
+  .sectionHead p{ font-size: 14px; }
 
-  .cardTitle{ font-size: 20px; }
-  .cardMeta{ font-size: 15px; }
-  .cardBody{ font-size: 17px; }
+  .cardTitle{ font-size: 18px; }
+  .cardMeta{ font-size: 14px; }
+  .cardBody{ font-size: 15px; }
 
   .pill{ font-size: 13px; }
   .pillBtn{ font-size: 14px; }
-  .list{ font-size: 17px; }
+  .list{ font-size: 15px; }
 }
 
 /* =========================
