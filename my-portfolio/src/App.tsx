@@ -160,8 +160,6 @@ export default function App() {
 
   useEffect(() => {
     const els = document.querySelectorAll<HTMLElement>("[data-reveal]");
-    const appEl = document.querySelector<HTMLElement>(".app");
-    let rafId = 0;
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -175,29 +173,9 @@ export default function App() {
       { threshold: 0.12 }
     );
 
-    const updateFaviconScroll = () => {
-      if (appEl) {
-        appEl.style.setProperty("--favicon-scroll-y", `${window.scrollY}px`);
-      }
-      rafId = 0;
-    };
-
-    const onScroll = () => {
-      if (rafId === 0) {
-        rafId = window.requestAnimationFrame(updateFaviconScroll);
-      }
-    };
-
-    updateFaviconScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-
     els.forEach((el) => io.observe(el));
     return () => {
       io.disconnect();
-      window.removeEventListener("scroll", onScroll);
-      if (rafId !== 0) {
-        window.cancelAnimationFrame(rafId);
-      }
     };
   }, []);
   return (
