@@ -19,8 +19,8 @@ type Card = { title: string; body: string; meta?: string; links?: Link[]; images
 type TimelineItem = { role: string; org: string; when: string; bullets: string[] };
 
 const links: Link[] = [
-  { label: "GitHub", href: "https://github.com/Emily-Breen" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/emily-breen-491769214/" },
+  { label: "GitHub", href: "https://github.com/" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/" },
 ];
 
 const aboutCards: Card[] = [
@@ -53,7 +53,7 @@ const projects: Card[] = [
     meta: "Final Year Project · Real-time Interactive System",
     body:
       "Designed and developed a real-time interactive system allowing live audience participation in gameplay using WebSockets. Built a multi-service architecture consisting of a C++ game client, React PWA frontend, ASP.Net Core API and Node.js WebSocket relay server. Engineered low-latency (<100ms) communication, deployed the full system to Microsoft Azure with CI/CD pipelines via GitHub Actions.",
-    links: [{ label: "View project", href: "https://github.com/Emily-Breen" }],
+    links: [{ label: "View project", href: "#" }],
     images: [CIH1Img, CIH2Img]
   },
   {
@@ -61,7 +61,7 @@ const projects: Card[] = [
     meta: "Award-winning · Best in Gameplay · EA Games Fleadh 2024",
     body:
       "Lead Designer within a multidisciplinary team. Contributed to gameplay design, iteration, and feature development using Agile practices. Designed and implemented core combat mechanics, character abilities, animations and enemy behaviours in C++ with SFML. Collaborated closely with artists and designers to ensure cohesive gameplay experience. Received 'Best in Gameplay' award at EA Games Fleadh 2024.",
-    links: [{ label: "View project", href: "https://scaldypanda.itch.io/bronze-age-brawl" }],
+    links: [{ label: "View project", href: "#" }],
     images:[BZAB1Img, BZAB2Img]
   },
 
@@ -70,7 +70,7 @@ const projects: Card[] = [
     meta: "Spring Interactive · March 2023",
     body:
       "A virtual pet game built in C++ using SFML. Implemented a fixed-timestep game loop, event-driven input handling, sprite animation, and multiple game states (gameplay/game over). Added pet stats (hunger, cleanliness, health) that change over time with UI interactions (feed/clean) and on-screen feedback messages.",
-      links: [{ label: "View project", href: "https://github.com/PeterLowe/spring-interactive-Emily-Breen" }],
+        links: [{ label: "View project", href: "#" }],
       images: [tamagotchiImg, tamagotchi2Img],
   },
   {
@@ -78,7 +78,7 @@ const projects: Card[] = [
     meta: "Sci-Fi Survival · April 2023",
     body:
       "A space survival game with real-time strategy elements Built in C++ using SFML. Players navigate through an onslaught of enemies, engaging with in tactical battles.",
-        links: [{ label: "View project", href: "https://github.com/Emily-Breen/1st-year-project-SPACE-CRUSIER.git" }],
+        links: [{ label: "View project", href: "#" }],
     images: [spacCruiser1Img, spacCruiser2Img],
     
   },
@@ -150,55 +150,56 @@ const DEST_EMAIL = "emilybreen8@gmail.com";
 function buildMailto() {
   const subject = encodeURIComponent("Portfolio contact");
   const body = encodeURIComponent(
-    `Hi Emily,\n\nI found your portfolio and I'd like to get in touch about...\n\n—\nName:\nCompany/Role:\nBest way to reply:\n`
+    `Hi Emily,\n\nI found your portfolio and I'd like to get in touch about...\n\n-\nName:\nCompany/Role:\nBest way to reply:\n`
   );
   return `mailto:${DEST_EMAIL}?subject=${subject}&body=${body}`;
 }
 
 export default function App() {
   const mailtoHref = buildMailto();
-useEffect(() => {
-  const els = document.querySelectorAll<HTMLElement>("[data-reveal]");
-  const appEl = document.querySelector<HTMLElement>(".app");
-  let rafId = 0;
 
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add("is-visible");
-          io.unobserve(e.target);
-        }
-      });
-    },
-    { threshold: 0.12 }
-  );
+  useEffect(() => {
+    const els = document.querySelectorAll<HTMLElement>("[data-reveal]");
+    const appEl = document.querySelector<HTMLElement>(".app");
+    let rafId = 0;
 
-  const updateFaviconScroll = () => {
-    if (appEl) {
-      appEl.style.setProperty("--favicon-scroll-y", `${window.scrollY}px`);
-    }
-    rafId = 0;
-  };
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
 
-  const onScroll = () => {
-    if (rafId === 0) {
-      rafId = window.requestAnimationFrame(updateFaviconScroll);
-    }
-  };
+    const updateFaviconScroll = () => {
+      if (appEl) {
+        appEl.style.setProperty("--favicon-scroll-y", `${window.scrollY}px`);
+      }
+      rafId = 0;
+    };
 
-  updateFaviconScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
+    const onScroll = () => {
+      if (rafId === 0) {
+        rafId = window.requestAnimationFrame(updateFaviconScroll);
+      }
+    };
 
-  els.forEach((el) => io.observe(el));
-  return () => {
-    io.disconnect();
-    window.removeEventListener("scroll", onScroll);
-    if (rafId !== 0) {
-      window.cancelAnimationFrame(rafId);
-    }
-  };
-}, []);
+    updateFaviconScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    els.forEach((el) => io.observe(el));
+    return () => {
+      io.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      if (rafId !== 0) {
+        window.cancelAnimationFrame(rafId);
+      }
+    };
+  }, []);
   return (
     <div className="app">
       <div className="bgGlow" />
@@ -275,9 +276,7 @@ useEffect(() => {
                 </div>
                 <div>
                   <div className="profileName">Emily Breen</div>
-                  <div className="profileMeta">
-                     Graduate Software Developer | Full-Stack, Mobile & Desktop Applications
-                    </div>
+                  <div className="profileMeta">Graduate Software Developer | Full-Stack, Mobile & Desktop Applications</div>
                 </div>
               </div>
 
@@ -297,6 +296,10 @@ useEffect(() => {
                 <div className="mini">
                   <div className="miniLabel">Workflow</div>
                   <div className="miniValue">Agile · Git · Azure DevOps</div>
+                </div>
+                <div className="mini">
+                  <div className="miniLabel">GPA</div>
+                  <div className="miniValue">Second Class Honours Grade 1</div>
                 </div>
               </div>
             </div>
@@ -330,18 +333,18 @@ useEffect(() => {
           <div className="cardGrid2">
             {projects.map((p) => (
               <article key={p.title} className="card cardHover">
-            {p.images && (
-  <div className="projectImageGrid">
-    {p.images.map((img, index) => (
-      <div
-        key={index}
-        className={`projectImageWrap stack ${["Tamagochi Clone", "PDF Validator", "HR Management System"].includes(p.title) ? "containMode" : ""}`}
-      >
-        <img src={img} alt={`${p.title} screenshot ${index + 1}`} className={`projectImage layer layer-${index}`} />
-      </div>
-    ))}
-  </div>
-)}
+                {p.images && (
+                  <div className="projectImageGrid">
+                    {p.images.map((img, index) => (
+                      <div
+                        key={index}
+                        className={`projectImageWrap stack ${["Tamagochi Clone", "PDF Validator", "HR Management System"].includes(p.title) ? "containMode" : ""}`}
+                      >
+                        <img src={img} alt={`${p.title} screenshot ${index + 1}`} className={`projectImage layer layer-${index}`} />
+                      </div>
+                    ))}
+                  </div>
+                )}
                 <div className="cardRow">
                   <div>
                     <div className="cardTitle">{p.title}</div>
